@@ -1,13 +1,10 @@
 import ListItem from "../listItem/ListItem";
 import SList from "./List.styles";
 
-const List = (props) => {
-    
-
+const List = ({onDeleteItem, items}) => {
     return (
-
         <SList>
-            {props.items.map(item => <ListItem key={Math.random().toString()} item={item} />)}
+            {items.map(item => <ListItem onDeleteItem={onDeleteItem} key={Math.random().toString()} item={item} />)}
 
         </SList>
     );
