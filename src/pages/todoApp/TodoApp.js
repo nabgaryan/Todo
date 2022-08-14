@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AddTodoItem from "./components/addTodoItem/AddTodoItem";
 import List from "./components/list/List";
-import ListItem from "./components/listItem/ListItem";
 
 
 const TodoApp = () => {
@@ -9,15 +8,19 @@ const TodoApp = () => {
   const onAdd = (value) => {
     if(value.trim()){
     const arr = [value, ...listItems];
-
     setListItems(arr);
   }
+  };
+
+  const onDeleteItem = (value) =>{
+    const updated = listItems.filter(item => item !== value);
+    setListItems(updated);
   };
 
   return (
     <div>
       <AddTodoItem onAdd={onAdd} />
-      <List items={listItems}/>
+      <List onDeleteItem={onDeleteItem} items={listItems}/>
     </div>
   );
 };
