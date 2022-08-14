@@ -1,10 +1,10 @@
 import ListItem from "../listItem/ListItem";
 import SList from "./List.styles";
 
-const List = ({onDeleteItem, items}) => {
+const List = ({onDeleteItem, items, onChecked}) => {
     return (
         <SList>
-            {items.map(item => <ListItem onDeleteItem={onDeleteItem} key={Math.random().toString()} item={item} />)}
+            {items.map((item, index) => <ListItem  index={index} onDeleteItem={onDeleteItem} onChecked={onChecked} key={Math.random().toString()} item={item} />)}
 
         </SList>
     );
