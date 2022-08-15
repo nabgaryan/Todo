@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
-
 const SListItem = styled.li`
 display: flex;
-text-align: left;
 padding: 4px 10px;
 height: 40px;
 border-radius: 4px;
@@ -20,6 +18,7 @@ justify-content: space-between;
 color: #ADD8E6;
 cursor: pointer;
 }
+text-decoration: ${props => (props.checked ? "line-through" : "none")};
 `;
 
 export default SListItem;
