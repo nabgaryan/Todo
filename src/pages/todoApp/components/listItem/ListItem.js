@@ -1,12 +1,15 @@
 import SListItem from "./ListItem.styled";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { useState } from "react";
+import EditField from "./editField/EditField";
+import { useState } from 'react';
 
 
 
 const ListItem = ({ item, onDeleteItem, onChecked, index }) => {
-    const {value, checked} = item;
+    const [editedValue, setEditedValue] = useState('');
+
+    const { value, checked } = item;
     const handleChange = () => {
         onChecked(index, !checked);
     };
@@ -14,9 +17,17 @@ const ListItem = ({ item, onDeleteItem, onChecked, index }) => {
     const onDeletHandler = () => {
         onDeleteItem(item);
     };
-    // const {item} = props; 
-    return (
 
+    const onEditHandler = (event) => {
+        setEditedValue(item.value = event.target.value);
+
+    };
+
+
+// const {item} = props; 
+return (
+    <div>
+        <EditField onChange={onEditHandler} />
         <SListItem checked={checked}>
             <div>
                 <input type='checkbox'
@@ -27,9 +38,13 @@ const ListItem = ({ item, onDeleteItem, onChecked, index }) => {
                 />
                 {value}
             </div>
-            <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+            <div>
+                <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
+                <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+            </div>
         </SListItem>
-    );
+    </div>
+);
 };
 
 export default ListItem;
