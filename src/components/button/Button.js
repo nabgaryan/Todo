@@ -1,4 +1,5 @@
 import SButton from './Button.style';
+import React from 'react';
 
 const Button = (props) => {
     const { children, shape, onClick, color } = props;

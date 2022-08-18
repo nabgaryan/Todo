@@ -1,4 +1,5 @@
 import SInput from './Input.style';
+import React from 'react';
 
 const Input = (props) => {
     const { value, onChange, placeholder } = props;

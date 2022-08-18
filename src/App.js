@@ -1,3 +1,4 @@
+import React from 'react';
 import './App.css';
 import TodoApp from './pages/todoApp/TodoApp';
 import { library } from '@fortawesome/fontawesome-svg-core';
