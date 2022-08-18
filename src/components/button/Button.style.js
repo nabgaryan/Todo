@@ -8,6 +8,7 @@ const SButton = styled.button`
  border: 1px solid ${props => props.color === 'blue' ? 'lightblue' : 'red'};
  color: white;
  font-size: 18px;
+ display: ${props => props.inline === 'inline' ? 'inline' : 'block'};
 `;
 
 export default SButton;

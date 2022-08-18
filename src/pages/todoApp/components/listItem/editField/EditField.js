@@ -1,11 +1,11 @@
 import SEditField from './EditField.styles';
 import React from 'react';
 
-const EditField = () => {
+const EditField = ({value, onChange}) => {
 
 
     return (
-        <SEditField />
+        <SEditField value={value} onChange={onChange} placeholder='Write your text here'/>
     );
 };
 

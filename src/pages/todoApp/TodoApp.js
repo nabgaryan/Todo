@@ -31,7 +31,7 @@ const TodoApp = () => {
   return (
     <div>
       <AddTodoItem onAdd={onAdd} />
-      <List onEdit={onEdit} onChecked={onChecked} onDeleteItem={onDeleteItem} items={listItems}/>
+      <List onAdd={onAdd} onEdit={onEdit} onChecked={onChecked} onDeleteItem={onDeleteItem} items={listItems}/>
     </div>
   );
 };
