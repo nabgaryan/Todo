@@ -6,8 +6,8 @@ import { useState } from 'react';
 
 
 
-const ListItem = ({ item, onDeleteItem, onChecked, index }) => {
-    const [editedValue, setEditedValue] = useState('');
+const ListItem = ({ item, onDeleteItem, onChecked, onEdit, index }) => {
+    const [isEdit, setIsedit] = useState(false);
 
     const { value, checked } = item;
     const handleChange = () => {
@@ -18,16 +18,18 @@ const ListItem = ({ item, onDeleteItem, onChecked, index }) => {
         onDeleteItem(item);
     };
 
-    const onEditHandler = (event) => {
-        setEditedValue(item.value = event.target.value);
+    const onEditHandler = (value, checked) => {
+        onEdit(index, );
 
     };
+if(isEdit){
+    return <EditField />;
+}
 
 
 // const {item} = props; 
 return (
-    <div>
-        <EditField onChange={onEditHandler} />
+    
         <SListItem checked={checked}>
             <div>
                 <input type='checkbox'
@@ -37,13 +39,13 @@ return (
                     onChange={handleChange}
                 />
                 {value}
+               
             </div>
             <div>
                 <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
-                <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+                <FontAwesomeIcon  onClick={onDeletHandler} icon={faTrash} />
             </div>
         </SListItem>
-    </div>
 );
 };
 
