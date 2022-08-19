@@ -7,10 +7,11 @@ import Button from "../../../../components/button/Button";
 
 
 
-const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onAdd }) => {
+const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave }) => {
     const [editFieldText, setEditFieldText] = useState('');
 
-    const { value, checked, isEditing } = item;
+    let { value, checked, isEditing,  ckliked} = item;
+
     const handleChange = () => {
         onChecked(index, !checked);
     };
@@ -25,19 +26,42 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onAdd }) => {
     };
 
     const onChangeText = (event) => {
-        setEditFieldText(event.target.value);
+     setEditFieldText(event.target.value);
 
     };
 
-    const onClickSave = (isEditing) => {
-        onAdd(editFieldText);
+    const onClickSaveHandler = () => {
+        onCklikSave(index, !ckliked, editFieldText);
+         
     };
+
+    if (ckliked) {
+        return (
+            <div>
+                <SListItem checked={checked} >
+                    <div>
+                        <input type='checkbox'
+                            label="Value 1"
+                            value={checked}
+                            checked={checked}
+                            onChange={handleChange}
+                        />
+                        {value}
+                    </div>
+                    <div>
+                        <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
+                        <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+                    </div>
+                </SListItem>
+            </div>
+        );
+    }
 
     if (isEditing) {
         return (
             <div >
                 <EditField value={editFieldText} onChange={onChangeText} />
-                <Button inline='inline' onClick={onClickSave} >Save</Button>
+                <Button inline='inline' onClick={onClickSaveHandler} >Save</Button>
                 <Button inline='inline'>Cancel</Button>
             </div>
         );
