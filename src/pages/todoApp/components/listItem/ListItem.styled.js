@@ -11,6 +11,12 @@ align-items: center;
 justify-content: space-between;
 .fa-trash{
     color: red;
+    margin-left: 10px;
+    cursor: pointer;
+}
+.svg-inline--fa.fa-pen-to-square {
+color: #ADD8E6;
+cursor: pointer;
 }
 text-decoration: ${props => (props.checked ? "line-through" : "none")};
 `;
