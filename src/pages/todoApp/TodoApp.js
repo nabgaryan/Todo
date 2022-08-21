@@ -6,7 +6,7 @@ import React from 'react';
 
 const TodoApp = () => {
   const [listItems, setListItems] = useState([]);
-  
+
    // {value: string, checked: boolean}
   const onAdd = (value) => {
     if(value.trim()){
@@ -19,11 +19,14 @@ const TodoApp = () => {
     let arr = [...listItems];
     arr[index].checked = checked;
     setListItems(arr);
+
   };
+
   const onEdit = (index, isEditing) =>{
     let arr = [...listItems];
     arr[index].isEditing = isEditing;
     setListItems(arr);
+
   };
 
 const onCklikSave = (index, ckliked, editFieldText) =>{
