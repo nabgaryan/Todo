@@ -1,15 +1,17 @@
+import React, { useState } from 'react';
 import SListItem from "./ListItem.styled";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace, faTrash } from '@fortawesome/free-solid-svg-icons';
 import EditField from "./editField/EditField";
-import { useState } from 'react';
+import Button from "../../../../components/button/Button";
 
 
 
-const ListItem = ({ item, onDeleteItem, onChecked, onEdit, index }) => {
-    const [isEdit, setIsedit] = useState(false);
+const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave }) => {
+    const [editFieldText, setEditFieldText] = useState('');
 
-    const { value, checked } = item;
+    let { value, checked, isEditing,  ckliked} = item;
+
     const handleChange = () => {
         onChecked(index, !checked);
     };
@@ -18,35 +20,75 @@ const ListItem = ({ item, onDeleteItem, onChecked, onEdit, index }) => {
         onDeleteItem(item);
     };
 
-    const onEditHandler = (value, checked) => {
-        onEdit(index, );
+    const onEditHandler = () => {
+        onEdit(index, !isEditing);
+        onCklikSave(index, ckliked = false);
 
     };
-if(isEdit){
-    return <EditField />;
-}
 
+    const onChangeText = (event) => {
+     setEditFieldText(event.target.value);
 
-// const {item} = props; 
-return (
-    
-        <SListItem checked={checked}>
+    };
+
+    const onClickSaveHandler = () => {
+        onCklikSave(index, !ckliked, editFieldText);
+        onEdit(index, isEditing = false);
+
+    };
+    console.log(item);
+
+    if (ckliked) {
+        return (
             <div>
-                <input type='checkbox'
-                    label="Value 1"
-                    value={checked}
-                    checked={checked}
-                    onChange={handleChange}
-                />
-                {value}
-               
+                <SListItem checked={checked} >
+                    <div>
+                        <input type='checkbox'
+                            label="Value 1"
+                            value={checked}
+                            checked={checked}
+                            onChange={handleChange}
+                        />
+                        {value}
+                    </div>
+                    <div>
+                        <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
+                        <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+                    </div>
+                </SListItem>
             </div>
-            <div>
-                <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
-                <FontAwesomeIcon  onClick={onDeletHandler} icon={faTrash} />
+        );
+    }
+
+    if (isEditing) {
+        return (
+            <div >
+                <EditField value={editFieldText} onChange={onChangeText} />
+                <Button inline='inline' onClick={onClickSaveHandler} >Save</Button>
+                <Button inline='inline'>Cancel</Button>
             </div>
-        </SListItem>
-);
+        );
+    }
+
+    return (
+        <div>
+            <SListItem checked={checked} >
+                <div>
+                    <input type='checkbox'
+                        label="Value 1"
+                        value={checked}
+                        checked={checked}
+                        onChange={handleChange}
+                    />
+                    {value}
+                </div>
+                <div>
+                    <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
+                    <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+                </div>
+            </SListItem>
+        </div>
+    );
 };
 
 export default ListItem;

@@ -1,10 +1,11 @@
 import SButton from './Button.style';
+import React from 'react';
 
 const Button = (props) => {
-    const { children, shape, onClick, color } = props;
+    const { children, shape, onClick, color, inline } = props;
 
     return (
-        <SButton color={color} shape={shape} onClick={onClick}>{children}</SButton>
+        <SButton inline={inline} color={color} shape={shape} onClick={onClick}>{children}</SButton>
     );
 };
 
