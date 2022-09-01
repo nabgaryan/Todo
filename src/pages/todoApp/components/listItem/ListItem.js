@@ -21,7 +21,7 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
     };
 
     const onEditHandler = () => {
-        onEdit(index, !isEditing);
+        onEdit(index, !isEditing, editFieldText);
 
     };
 
