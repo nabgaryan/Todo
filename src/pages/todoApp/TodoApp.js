@@ -6,43 +6,49 @@ import React from 'react';
 
 const TodoApp = () => {
   const [listItems, setListItems] = useState([]);
-  
-   // {value: string, checked: boolean}
+
+  // {value: string, checked: boolean}
   const onAdd = (value) => {
-    if(value.trim()){
-    const arr = [{value, checked: false, isEditing: false, ckliked: false}, ...listItems];
-    setListItems(arr);
-  }
+    if (value.trim()) {
+      setListItems((previousState) => {
+        return [{ value, checked: false, isEditing: false, ckliked: false }, ...previousState];
+      });
+    }
   };
 
-  const onChecked = (index, checked) =>{
-    let arr = [...listItems];
-    arr[index].checked = checked;
-    setListItems(arr);
-  };
-  const onEdit = (index, isEditing) =>{
-    let arr = [...listItems];
-    arr[index].isEditing = isEditing;
-    setListItems(arr);
+  const onChecked = (index, checked) => {
+    setListItems((previousState) => {
+      let arr = [...previousState];
+      arr[index].checked = checked;
+    });
   };
 
-const onCklikSave = (index, ckliked, editFieldText) =>{
-  let arr = [...listItems];
-  arr[index].value = editFieldText;
-  arr[index].ckliked = ckliked;
-  setListItems(arr);
-};
+  const onEdit = (index, isEditing) => {
+    setListItems((previousState) => {
+      let arr = [...previousState];
+      arr[index].isEditing = isEditing;
+    });
 
-  const onDeleteItem = (element) =>{
+  };
+
+  const onCklikSave = (index, ckliked, editFieldText) => {
+  
+    setListItems((previousState) => {
+      let arr = [...previousState];
+      arr[index].value = editFieldText;
+      arr[index].ckliked = ckliked;    });
+  };
+
+  const onDeleteItem = (element) => {
     const updated = listItems.filter(item => item.value !== element.value);
-    setListItems(updated);
+    setListItems((prevState) => updated);
   };
 
 
   return (
     <div>
       <AddTodoItem onAdd={onAdd} />
-      <List onCklikSave={onCklikSave} onEdit={onEdit} onChecked={onChecked} onDeleteItem={onDeleteItem} items={listItems}/>
+      <List onCklikSave={onCklikSave} onEdit={onEdit} onChecked={onChecked} onDeleteItem={onDeleteItem} items={listItems} />
     </div>
   );
 };

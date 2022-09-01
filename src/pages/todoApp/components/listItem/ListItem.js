@@ -8,9 +8,8 @@ import Button from "../../../../components/button/Button";
 
 
 const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave }) => {
-    const [editFieldText, setEditFieldText] = useState('');
-
-    let { value, checked, isEditing,  ckliked} = item;
+    let { value, checked, isEditing, ckliked } = item;
+    const [editFieldText, setEditFieldText] = useState(value);
 
     const handleChange = () => {
         onChecked(index, !checked);
@@ -19,20 +18,25 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
     const onDeletHandler = () => {
         onDeleteItem(item);
     };
-
     const onEditHandler = () => {
-        onEdit(index, !isEditing, editFieldText);
-
+        onEdit(index, !isEditing);
+        onCklikSave(index, ckliked = false, editFieldText);
     };
 
     const onChangeText = (event) => {
-     setEditFieldText(event.target.value);
-
+        setEditFieldText(event.target.value);
+        
     };
 
     const onClickSaveHandler = () => {
         onCklikSave(index, !ckliked, editFieldText);
-         
+        onEdit(index, !isEditing);
+        
+    };
+
+    const cnClickCancelHandler = () => {
+        onEdit(index, !isEditing);
+
     };
 
     if (ckliked) {
@@ -62,7 +66,7 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
             <div >
                 <EditField value={editFieldText} onChange={onChangeText} />
                 <Button inline='inline' onClick={onClickSaveHandler} >Save</Button>
-                <Button inline='inline'>Cancel</Button>
+                <Button inline='inline' onClick={cnClickCancelHandler}>Cancel</Button>
             </div>
         );
     }
