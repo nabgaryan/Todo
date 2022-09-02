@@ -6,9 +6,8 @@ import EditField from "./editField/EditField";
 import Button from "../../../../components/button/Button";
 
 
-
 const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave }) => {
-    let { value, checked, isEditing, ckliked } = item;
+    let { value, checked, isEditing } = item;
     const [editFieldText, setEditFieldText] = useState(value);
 
     const handleChange = () => {
@@ -18,20 +17,17 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
     const onDeletHandler = () => {
         onDeleteItem(item);
     };
+
     const onEditHandler = () => {
         onEdit(index, !isEditing);
-        onCklikSave(index, ckliked = false, editFieldText);
     };
 
     const onChangeText = (event) => {
         setEditFieldText(event.target.value);
-        
     };
 
     const onClickSaveHandler = () => {
-        onCklikSave(index, !ckliked, editFieldText);
-        onEdit(index, !isEditing);
-        
+        onCklikSave(index, !isEditing, editFieldText);
     };
 
     const cnClickCancelHandler = () => {
@@ -39,29 +35,7 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
 
     };
 
-    if (ckliked) {
-        return (
-            <div>
-                <SListItem checked={checked} >
-                    <div>
-                        <input type='checkbox'
-                            label="Value 1"
-                            value={checked}
-                            checked={checked}
-                            onChange={handleChange}
-                        />
-                        {value}
-                    </div>
-                    <div>
-                        <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
-                        <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
-                    </div>
-                </SListItem>
-            </div>
-        );
-    }
-
-    if (isEditing) {
+   if (isEditing) {
         return (
             <div >
                 <EditField value={editFieldText} onChange={onChangeText} />
@@ -69,7 +43,7 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
                 <Button inline='inline' onClick={cnClickCancelHandler}>Cancel</Button>
             </div>
         );
-    }
+    } else {
 
     return (
         <div>
@@ -90,6 +64,6 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
             </SListItem>
         </div>
     );
+}
 };
-
 export default ListItem;

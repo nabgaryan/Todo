@@ -11,39 +11,36 @@ const TodoApp = () => {
   const onAdd = (value) => {
     if (value.trim()) {
       setListItems((previousState) => {
-        return [{ value, checked: false, isEditing: false, ckliked: false }, ...previousState];
+        return [{ value, checked: false, isEditing: false }, ...previousState];
       });
     }
   };
 
   const onChecked = (index, checked) => {
-    setListItems((previousState) => {
-      let arr = [...previousState];
-      arr[index].checked = checked;
-    });
+    let arr = [...listItems];
+    arr[index].checked = checked;
+    setListItems(arr);
   };
 
   const onEdit = (index, isEditing) => {
-    setListItems((previousState) => {
-      let arr = [...previousState];
-      arr[index].isEditing = isEditing;
-    });
+    let arr = [...listItems];
+    arr[index].isEditing = isEditing;
+    setListItems(arr);
 
   };
 
-  const onCklikSave = (index, ckliked, editFieldText) => {
-  
-    setListItems((previousState) => {
-      let arr = [...previousState];
-      arr[index].value = editFieldText;
-      arr[index].ckliked = ckliked;    });
+  const onCklikSave = (index, isEditing, editFieldText) => {
+    let arr = [...listItems];
+    arr[index].value = editFieldText;
+    arr[index].isEditing = isEditing;
+    setListItems(arr);
+
   };
 
   const onDeleteItem = (element) => {
     const updated = listItems.filter(item => item.value !== element.value);
     setListItems((prevState) => updated);
   };
-
 
   return (
     <div>
