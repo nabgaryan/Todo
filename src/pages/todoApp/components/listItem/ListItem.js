@@ -7,8 +7,8 @@ import Button from "../../../../components/button/Button";
 
 
 
-const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave, oncklickcancel }) => {
-    let { value, checked, isEditing, ckliked, cancel } = item;
+const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave }) => {
+    let { value, checked, isEditing, ckliked } = item;
     const [editFieldText, setEditFieldText] = useState(value);
 
     const handleChange = () => {
@@ -30,7 +30,7 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave, o
 
     const onClickSaveHandler = () => {
         onCklikSave(index, !ckliked, editFieldText);
-        onEdit(index, isEditing = false);
+        onEdit(index, !isEditing);
         
     };
 
