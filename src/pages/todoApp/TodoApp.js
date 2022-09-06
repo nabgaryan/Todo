@@ -3,11 +3,9 @@ import AddTodoItem from "./components/addTodoItem/AddTodoItem";
 import List from "./components/list/List";
 import React from 'react';
 
-
 const TodoApp = () => {
   const [listItems, setListItems] = useState([]);
 
-  // {value: string, checked: boolean}
   const onAdd = (value) => {
     if (value.trim()) {
       setListItems((previousState) => {
@@ -26,7 +24,6 @@ const TodoApp = () => {
     let arr = [...listItems];
     arr[index].isEditing = isEditing;
     setListItems(arr);
-
   };
 
   const onClickSave = (index, isEditing, editFieldText) => {
@@ -34,7 +31,6 @@ const TodoApp = () => {
     arr[index].value = editFieldText;
     arr[index].isEditing = isEditing;
     setListItems(arr);
-
   };
 
   const onDeleteItem = (element) => {
