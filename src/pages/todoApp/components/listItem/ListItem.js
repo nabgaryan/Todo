@@ -5,7 +5,6 @@ import { faBackspace, faTrash } from '@fortawesome/free-solid-svg-icons';
 import EditField from "./editField/EditField";
 import Button from "../../../../components/button/Button";
 
-
 const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onClickSave }) => {
     let { value, checked, isEditing } = item;
     const [editFieldText, setEditFieldText] = useState(value);
@@ -30,40 +29,36 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onClickSave })
         onClickSave(index, !isEditing, editFieldText);
     };
 
-    const cnClickCancelHandler = () => {
+    const onClickCancelHandler = () => {
         onEdit(index, !isEditing);
-
     };
 
-   if (isEditing) {
-        return (
-            <div >
-                <EditField value={editFieldText} onChange={onChangeText} />
-                <Button inline='inline' onClick={onClickSaveHandler} >Save</Button>
-                <Button inline='inline' onClick={cnClickCancelHandler}>Cancel</Button>
+    let todoListContent = <div>
+        <SListItem checked={checked} >
+            <div>
+                <input type='checkbox'
+                    label="Value 1"
+                    value={checked}
+                    checked={checked}
+                    onChange={handleChange}
+                />
+                {value}
             </div>
-        );
-    } else {
-
-    return (
-        <div>
-            <SListItem checked={checked} >
-                <div>
-                    <input type='checkbox'
-                        label="Value 1"
-                        value={checked}
-                        checked={checked}
-                        onChange={handleChange}
-                    />
-                    {value}
-                </div>
-                <div>
-                    <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
-                    <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
-                </div>
-            </SListItem>
+            <div>
+                <FontAwesomeIcon onClick={onEditHandler} icon="fa-solid fa-pen-to-square" />
+                <FontAwesomeIcon onClick={onDeletHandler} icon={faTrash} />
+            </div>
+        </SListItem>
+    </div>;
+    if (isEditing) {
+        todoListContent = <div>
+            <EditField value={editFieldText} onChange={onChangeText} />
+            <Button inline='inline' onClick={onClickSaveHandler} >Save</Button>
+            <Button inline='inline' onClick={onClickCancelHandler}>Cancel</Button>
         </div>
-    );
-}
+    }
+    
+    return todoListContent;
+
 };
 export default ListItem;
