@@ -29,7 +29,7 @@ const TodoApp = () => {
 
   };
 
-  const onCklikSave = (index, isEditing, editFieldText) => {
+  const onClickSave = (index, isEditing, editFieldText) => {
     let arr = [...listItems];
     arr[index].value = editFieldText;
     arr[index].isEditing = isEditing;
@@ -45,7 +45,7 @@ const TodoApp = () => {
   return (
     <div>
       <AddTodoItem onAdd={onAdd} />
-      <List onCklikSave={onCklikSave} onEdit={onEdit} onChecked={onChecked} onDeleteItem={onDeleteItem} items={listItems} />
+      <List onClickSave={onClickSave} onEdit={onEdit} onChecked={onChecked} onDeleteItem={onDeleteItem} items={listItems} />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import EditField from "./editField/EditField";
 import Button from "../../../../components/button/Button";
 
 
-const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave }) => {
+const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onClickSave }) => {
     let { value, checked, isEditing } = item;
     const [editFieldText, setEditFieldText] = useState(value);
 
@@ -27,7 +27,7 @@ const ListItem = ({ item, onDeleteItem, onChecked, index, onEdit, onCklikSave })
     };
 
     const onClickSaveHandler = () => {
-        onCklikSave(index, !isEditing, editFieldText);
+        onClickSave(index, !isEditing, editFieldText);
     };
 
     const cnClickCancelHandler = () => {
